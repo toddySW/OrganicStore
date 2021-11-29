@@ -27,7 +27,8 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title">Thông tin người dùng</h4>
-                                        <form class="forms-sample">
+                                        <!--Chuyển dữ liệu lên từ người dùng qua form (action)-->
+                                        <form  class="forms-sample">
                                             <div class="form-group">
                                                 <label for="exampleInputUserName1">User name</label>
                                                 <input type="userName" class="form-control p-input" id="txt_username" name="txt_username" placeholder="UserName">
