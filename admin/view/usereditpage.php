@@ -26,7 +26,7 @@
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title">Thông tin người dùng</h4>
+                                        <h4 class="card-title">Cập nhật thông tin người dùng</h4>
                                         
                                         <!--Chuyển dữ liệu lên từ người dùng qua form (thông qua attribute action = "path làm việc cùng" và method = "GET OR POST")
                                         key: attribute name = "txt_username" 
@@ -76,7 +76,7 @@
                                                 </div>
                                             </fieldset>-->
                                             <div class="col-12">
-                                                <input type="submit" name="btn_save" class="btn btn-primary" value="save">
+                                                <input type="submit" name="btn_update" class="btn btn-primary" value="Update">
                                                 <input type="reset" name="btn_cancel" class="btn btn-danger" value="cancel">
                                             </div>
                                         </form>
@@ -94,8 +94,7 @@
                 </div>
                 <!-- main-panel ends -->
             </div>
-            <!-- page-
-            body-wrapper ends -->
+            <!-- page-body-wrapper ends -->
         </div>
         <!-- container-scroller -->
 
