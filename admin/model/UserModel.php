@@ -10,7 +10,7 @@
  *
  * @author User
  */
-class User {
+class UserModel {
 
     //put your code here
     private $username;
