@@ -35,7 +35,6 @@ $isUser = isExistUser($txt_email, $arr_users);
 if ($isUser) {
     //chuyển trang trong php
     header("Location: ../view/usereditpage.php?email=" . $txt_email);
-    
 } else {
    header("Location: ../view/userlistpage.php");
 }
