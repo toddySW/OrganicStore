@@ -1,6 +1,7 @@
 <?php
 
 include_once '../model/UserModel.php';
+include_once '../utils/MySQLUtil.php';
 
 //hàm kiểm tra user có tồn tại hay không?
 function isExistUser($email, $users = array()) {
@@ -32,6 +33,13 @@ array_push($arr_users, $user_01);
 
 //excute function isExistUser()
 $isUser = isExistUser($txt_email, $arr_users);
+//Connect DB
+$myDB =  new MySQLUtil();
+
+$myDB =  new MySQLUtil();
+$myDB->disconnectDB();
+die;
+
 if ($isUser) {
     //chuyển trang trong php
     header("Location: ../view/usereditpage.php?email=" . $txt_email);
