@@ -15,11 +15,10 @@ class MySQLUtil {
         $this->password = "";
         $this->dbname = "organicstore";
         //singelton pattern 
-        if (self::$conn == NULL) //truy cap bien static
-        {
+        if (self::$conn == NULL) { //truy cap bien static
             echo 'Tao ket noi moi <br>';
             $this->connectDB();
-        }else {
+        } else {
             echo 'Lay ket noi cu <br>';
             self::$conn;
         }
@@ -44,10 +43,40 @@ class MySQLUtil {
             echo "Connection failed: " . $e->getMessage();
         }
     }
-    
+
     public function disconnectDB() {
         echo 'Ngat ket noi';
         self::$conn = NULL;
+    }
+
+    //--------------------------------------------------------------------------
+    public function insertData($query, $para = array()) {
+        $stmt = self::$conn->prepare($query);
+        $stmt->execute($para);
+    }
+
+    public function getAllData($query) {
+        $stmt = self::$conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getData($query, $para = array()) {
+        $stmt = self::$conn->prepare($query);
+        $stmt->execute($para);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteData($query, $para = array()) {
+        $stmt = self::$conn->prepare($query);
+        $stmt->execute($para);
+        return $stmt->rowCount();
+    }
+
+   public function updateData($query, $para = array()) {
+        $stmt = self::$conn->prepare($query);
+        $stmt->execute($para);
+        return $stmt->rowCount();
     }
 
 }
