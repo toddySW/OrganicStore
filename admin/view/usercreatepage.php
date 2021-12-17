@@ -49,11 +49,11 @@
                                                 <label for="exampleTextarea">Bio</label>
                                                 <textarea class="form-control p-input" id="txt_bio" name="txt_bio" rows="3"></textarea>
                                             </div>
-                                            <div class="form-group">
+<!--                                            <div class="form-group">
                                                 <label for="exampleInputFile">Avatar</label>
                                                 <input type="file" class="form-control-file" id="file_avatar" name="file_avatar" aria-describedby="fileHelp">
                                                 <small id="fileHelp" class="form-text text-muted"></small>
-                                            </div>
+                                            </div>-->
 <!--                                            <fieldset class="form-group">
                                                 <legend class="mb-4 mt-5">Gender</legend>
                                                 <div class="form-check">
@@ -76,7 +76,7 @@
                                                 </div>
                                             </fieldset>-->
                                             <div class="col-12">
-                                                <input type="submit" name="btn_save" class="btn btn-primary" value="save">
+                                                <input type="submit" name="user_action" class="btn btn-primary" value="create">
                                                 <input type="reset" name="btn_cancel" class="btn btn-danger" value="cancel">
                                             </div>
                                         </form>

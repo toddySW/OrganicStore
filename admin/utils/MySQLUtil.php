@@ -16,12 +16,9 @@ class MySQLUtil {
         $this->dbname = "organicstore";
         //singelton pattern 
         if (self::$conn == NULL) { //truy cap bien static
-            echo 'Tao ket noi moi <br>';
             $this->connectDB();
-        } else {
-            echo 'Lay ket noi cu <br>';
-            self::$conn;
-        }
+        } 
+            return self::$conn;
     }
 
     public function __destruct() {
@@ -45,7 +42,6 @@ class MySQLUtil {
     }
 
     public function disconnectDB() {
-        echo 'Ngat ket noi';
         self::$conn = NULL;
     }
 

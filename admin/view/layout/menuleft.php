@@ -9,8 +9,8 @@
             </a>
             <div class="collapse" id="auth">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="userlistpage.php"> Danh sách user </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="usercreatepage.php"> Thêm người dùng </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="./userlistpage.php"> Danh sách user </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="./usercreatepage.php"> Thêm người dùng </a></li>
                 </ul>
             </div>
         </li>
@@ -28,7 +28,7 @@
                     <div>
                         <div class="d-flex align-items-center">
                             <div class="sidebar-profile-img">
-                                <img src="assets/images/faces/face28.png" alt="image">
+                                <img src="../view/assets/images/faces/face28.png" alt="image">
                             </div>
                             <div class="sidebar-profile-text">
                                 <p class="mb-1">Henry Klein</p>
