@@ -31,19 +31,21 @@
                 </div>
                 <h4>Hello! let's get started</h4>
                 <h6 class="font-weight-light">Sign in to continue.</h6>
+<!--                watch out-->
                 <form class="pt-3" action="../controller/UserController.php" method="POST">
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
+                    <input type="email" name="txt_email" class="form-control form-control-lg" id="txt_email" placeholder="Email">
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                      <input type="password" name="txt_password" class="form-control form-control-lg" id="txt_password" placeholder="Password">
                   </div>
                   <div class="mt-3">
-                    <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">SIGN IN</a>
+                      <button type="submit" name="user_action" value="login">SIGN IN</button>
                   </div>
                   <div class="my-2 d-flex justify-content-between align-items-center">
                     <div class="form-check">
                       <label class="form-check-label text-muted">
+<!--                         watch out-->
                         <input type="checkbox" class="form-check-input"> Keep me signed in </label>
                     </div>
                     <a href="#" class="auth-link text-black">Forgot password?</a>

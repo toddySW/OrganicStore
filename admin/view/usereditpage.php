@@ -76,7 +76,7 @@
                                                 </div>
                                             </fieldset>-->
                                             <div class="col-12">
-                                                <input type="submit" name="user_action" class="btn btn-primary" value="user_edit">
+                                                <input type="submit" name="user_action" class="btn btn-primary" value="edit">
                                                 <input type="reset" name="btn_cancel" class="btn btn-danger" value="cancel">
                                             </div>
                                         </form>

@@ -10,6 +10,7 @@ include_once '../utils/MySQLUtil.php';
 class UserModel {
 
     //put your code here
+    private $userID;
     private $username;
     private $email;
     private $password;
@@ -70,10 +71,16 @@ class UserModel {
         $this->bio = $bio;
     }
 
+    public function getUserID() {
+        return $this->userID;
+    }
+    
 //    public function setAvatar($avatar): void {
 //        $this->avatar = $avatar;
 //    }
-    //----------------------------------------
+//    
+//    
+    //------------------------------------------
     //Insert(Add) user -------------------------
     public function insertUser() {
         $myDB = new MySQLUtil();
@@ -83,7 +90,7 @@ class UserModel {
         $myDB->insertData($query, $para);
         $myDB->disconnectDB();
     }
-    
+
     public function updateUser() {
         $myDB = new MySQLUtil();
 
@@ -92,8 +99,7 @@ class UserModel {
         $myDB->updateData($query, $para);
         $myDB->disconnectDB();
     }
-    
- 
+
     public function getAllUser() {
         $data = NULL;
         $myDB = new MySQLUtil();
@@ -101,6 +107,27 @@ class UserModel {
         $data = $myDB->getAllData($query);
         $myDB->disconnectDB();
         return $data;
+    }
+
+    public function getUserByID() {
+        $data = NULL;
+        $myDB = new MySQLUtil();
+        $query = "SELECT ID, username, email, userpassword, bio FROM user WHERE ID=:ID";
+        $para = array(":ID" => $this->getUserID());
+        $data = $myDB->getData($query, $para);
+        $myDB->disconnectDB();
+        return $data;
+    }
+    
+    public function getUserByEmail() {
+        $data = NULL;
+        $myDB = new MySQLUtil();
+        $query = "SELECT ID, username, email, userpassword, bio FROM user WHERE email=:email";
+        $para = array(":email" => $this->getEmail());
+        $data = $myDB->getData($query, $para);
+        $myDB->disconnectDB();
+        return $data;
+        
     }
 
 }

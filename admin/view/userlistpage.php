@@ -50,7 +50,8 @@
                                                         echo '<td>' . $data['user_list'][$i]['username'] . '</td>';
                                                         echo '<td>' . $data['user_list'][$i]['email'] . '</td>';
                                                         echo '<td>' . $data['user_list'][$i]['bio'] . '</td>';
-                                                        echo '<td><a href="../view/usereditpage.php" class="btn btn-success" >Edit</a></td>';
+                                                        //getID --> editUser
+                                                        echo '<td><a href="../controller/UserController.php?action=getedit&id' . $data['user_list'][$i]['ID'] . '" class="btn btn-success">Edit</a></td>';
                                                         echo '</tr>';
                                                     }
                                                 }
