@@ -15,20 +15,39 @@ class UserController extends BaseController {
                 $txt_password = md5($_POST["txt_password"]);
                 $txt_bio = $_POST["txt_bio"];
 
-                $user = new UserModel($txt_username, $txt_email, $txt_password, $txt_bio);
+                $user = new UserModel($txt_username, $txt_email, $txt_password, $txt_bio, "0");
 
                 $this->insertUser($user);
                 header('Location: ../controller/UserController.php');
                 break;
-            case 'edit':
-                $this->updateUser($user);
-//                header('Location: ../view/userlistpage.php');
+            case 'postedit':
+                $txt_userid = $_POST["txt_userid"];
+                $txt_username = $_POST["txt_username"];
+                $txt_email = $_POST["txt_email"];
+                $txt_password = md5($_POST["txt_password"]);
+                $txt_bio = $_POST["txt_bio"]; 
+                $user = new UserModel($txt_username, $txt_email, $txt_password, $txt_bio, $txt_userid);
+               
+                $this->editUser($user);
+                header('Location: ../controller/UserController.php');
                 break;
-            case 'login': //toi day roi ne
+            case 'getedit': 
+                $id = $_GET["id"]; //lay ID 
+                $user = new UserModel("", "", "", "", $id);
+                $data['user_info'] = $this->getUser($user, "id");
+                $this->view('usereditpage', $data); //kế thừa lớp view ở BaseController
+                break;
+            case 'delete': 
+                $id = $_GET["id"]; //lay ID 
+                $user = new UserModel("", "", "", "", $id);
+                $data['user_info'] = $this->deleteUser($user, "id");
+                header('Location: ../controller/UserController.php');
+                break;
+            case 'login': 
                 $txt_email = $_POST["txt_email"];
                 $txt_password = md5($_POST["txt_password"]);
                 
-                $user = new UserModel("", $txt_email, $txt_password, "");
+                $user = new UserModel("", $txt_email, $txt_password, "", "");
                 
                 $data = $this->getUser($user, "email");
                 if ($data["email"] == $txt_email && $data["userpassword"] == $txt_password) {
@@ -48,9 +67,10 @@ class UserController extends BaseController {
                 header('Location: ../view/login.php');
                 break;
             default:
-                var_dump($_GET); //getID user to edit
-                $user = new UserModel("", "", "", "");
-                $this->getAllUser($user);
+                var_dump($_GET); //
+                $user = new UserModel("", "", "", "", 0);
+                $data['user_list'] = $this->getAllUser($user);
+                $this->view('userlistpage', $data); //kế thừa lớp view ở BaseController
                 break;
         }
     }
@@ -60,8 +80,11 @@ class UserController extends BaseController {
     }
 
     public function editUser($user) {
-        //xu ly sau
         $user->updateUser();
+    }
+    
+     public function deleteUser($user) {
+        $user->deleteUser();
     }
 
     public function getUser($user, $type) {
@@ -73,8 +96,7 @@ class UserController extends BaseController {
     }
 
     public function getAllUser($user) {
-        $data['user_list'] = $user->getAllUser();
-        $this->view('userlistpage', $data); //kế thừa lớp view ở BaseController
+        return $user->getAllUser();
     }
 
 }

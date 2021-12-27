@@ -18,11 +18,12 @@ class UserModel {
 
 //    private $avatar;
     //constructor function 
-    public function __construct($usrname, $usremail, $usrpassword, $usrbio) {
+    public function __construct($usrname, $usremail, $usrpassword, $usrbio, $usrid) {
         $this->username = $usrname;
         $this->email = $usremail;
         $this->password = $usrpassword;
         $this->bio = $usrbio;
+        $this->userID= $usrid;
 //        $this->avatar = $usravatar;
     }
 
@@ -94,8 +95,17 @@ class UserModel {
     public function updateUser() {
         $myDB = new MySQLUtil();
 
-        $query = "UPDATE user SET username=:username, userpassword=:userpassword, bi0=:bio WHERE email=:enmail";
-        $para = array(":username" => $this->getUsername(), ":email" => $this->getEmail(), ":userpassword" => $this->getPassword(), ":bio" => $this->getBio());
+        $query = "UPDATE user SET username=:username, userpassword=:userpassword, bio=:bio WHERE ID=:ID";
+        $para = array(":username" => $this->getUsername(), ":userpassword" => $this->getPassword(), ":bio" => $this->getBio(), ":ID"=>$this->getUserID());
+        $myDB->updateData($query, $para);
+        $myDB->disconnectDB();
+    }
+    
+    public function deleteUser() {
+        $myDB = new MySQLUtil();
+
+        $query = "DELETE FROM user WHERE ID=:ID";
+        $para = array(":ID"=>$this->getUserID());
         $myDB->updateData($query, $para);
         $myDB->disconnectDB();
     }

@@ -51,7 +51,8 @@
                                                         echo '<td>' . $data['user_list'][$i]['email'] . '</td>';
                                                         echo '<td>' . $data['user_list'][$i]['bio'] . '</td>';
                                                         //getID --> editUser
-                                                        echo '<td><a href="../controller/UserController.php?action=getedit&id' . $data['user_list'][$i]['ID'] . '" class="btn btn-success">Edit</a></td>';
+                                                        echo '<td><a href="../controller/UserController.php?action=getedit&id=' . $data['user_list'][$i]['ID'] . '" class="btn btn-success">Edit</a></td>';
+                                                        echo '<td><a href="../controller/UserController.php?action=delete&id=' . $data['user_list'][$i]['ID'] . '" class="btn btn-danger">Delete</a></td>';
                                                         echo '</tr>';
                                                     }
                                                 }

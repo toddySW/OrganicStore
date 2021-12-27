@@ -9,8 +9,8 @@
             </a>
             <div class="collapse" id="auth">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="./userlistpage.php"> Danh sách user </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="./usercreatepage.php"> Thêm người dùng </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="../controller/UserController.php"> Danh sách user </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="../view/usercreatepage.php"> Thêm người dùng </a></li>
                 </ul>
             </div>
         </li>
