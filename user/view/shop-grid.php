@@ -148,7 +148,7 @@
                                 </div>
                             </div>
                             <div class="sidebar__item">
-                    
+
                             </div>
                         </div>
                     </div>
@@ -178,55 +178,83 @@
                             </div>
                         </div>
                         <div class="row" >
-                                    <?php
-                                    for ($i = 0; $i < count($data["product_list"]); $i++) {
-//                                        echo '<div class="row">';
-                                        echo ' <div class = "col-lg-4 col-md-6 col-sm-6">';
-                                        echo ' <div class = "product__item">';
-                                        echo '<div class = "product__item__pic set-bg" data-setbg = "' . $data["product_list"][$i]["image"] . '">';
-                                        echo '<ul class = "product__item__pic__hover">';
-                                        echo '<li><a href = "#"><i class = "fa fa-heart"></i></a></li>';
-                                        echo ' <li><a href = "#"><i class = "fa fa-retweet"></i></a></li>';
-                                        echo '<li><a href = "#"><i class = "fa fa-shopping-cart"></i></a></li>';
-                                        echo '</ul>';
-                                        echo ' </div>';
-                                        echo '<div class = "product__item__text">';
-                                        echo '<h6><a href = "#">' . $data["product_list"][$i]["name"] . '</a></h6>';
-                                        echo ' <h5>' . $data["product_list"][$i]["price"] . '</h5>';
-                                        echo '</div>';
-                                        echo ' </div>';
-                                        echo '</div>';
-//                                        echo '</div>';
-//                                        echo '</div>';
-                                    }
-                                    ?>
-                                    <div class="product__pagination">
-                                        <a href="#">1</a>
-                                        <a href="#">2</a>
-                                        <a href="#">3</a>
-                                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-                                    </div>
-                                </div>
+                            <?php
+                            for ($i = 0; $i < count($data["product_list"]); $i++) {
+                                echo '<div class = "col-lg-4 col-md-6 col-sm-6">';
+                                echo '<form action="../controller/OrderController.php" method="POST">';
+                                echo '<div class = "product__item">';
+                                echo '<div class = "product__item__pic set-bg" data-setbg = "' . $data["product_list"][$i]["image"] . '">';
+                                echo '<ul class = "product__item__pic__hover">';
+                                //*********************************************** add item (value)
+                                echo '<li><button type= "submit" name="order_action" value="add"><i class = "fa fa-shopping-cart"></i></button></li>';
+//                                echo '<li><button type = ""><i class = "fa fa-heart"></i></button></li>';
+//                                echo '<li><button type = ""><i class = "fa fa-retweet"></i></button></li>';
+                                echo '</ul>';
+//                                echo '<button type= "submit" name="order_action" value="add">Add to cart</button>';
+                                echo '</div>';
+                                echo '<div class = "product__item__text">';
+                                echo '<h6><a href = "#">' . $data["product_list"][$i]["name"] . '</a></h6>';
+                                echo '<h5>' . $data["product_list"][$i]["price"] . '</h5>';
+                                echo '<input type="text" hidden name="product_id" value= "' . $data["product_list"][$i]["id"] . '"</>';
+                                echo '<input type="text" hidden name="product_name" value= "' . $data["product_list"][$i]["name"] . '"</>';
+                                echo '<input type="text" hidden name="product_image" value= "' . $data["product_list"][$i]["image"] . '"</>';
+                                echo '<input type="text" hidden name="product_price" value= "' . $data["product_list"][$i]["price"] . '"</>';
+                                echo '</div>';
+                                echo '</div>';
+                                echo '</form>';
+                                echo '</div>';
+                            }
+                            ?>
+                            <div class="product__pagination">
+                                <a href="#">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
+                                <a href="#"><i class="fa fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
-                    </section>
-                    <!-- Product Section End -->
+                </div>
+        </section>
+        <!-- Product Section End -->
 
-                    <!-- Footer Section Begin -->
-                    <?php
-                    include '../view/layout/footer.php';
-                    ?>
-                    <!-- Footer Section End -->
+        <!-- Footer Section Begin -->
+        <?php
+        include '../view/layout/footer.php';
+        ?>
+        <!-- Footer Section End -->
 
-                    <!-- Js Plugins -->
-                    <?php
-                    include '../view/layout/script.php';
-                    ?>
-
-
+        <!-- Js Plugins -->
+        <?php
+        include '../view/layout/script.php';
+        ?>
 
 
-                    </body>
 
-                    </html>
+
+
+<!--        <div class = "col-lg-4 col-md-6 col-sm-6">
+            <form action="../controller/OrderController.php" method="POST">
+                <div class = "product__item">
+                    <div class = "product__item__pic set-bg" data-setbg = "' . $data["product_list"][$i]["image"] . '">
+                        <ul class = "product__item__pic__hover">
+                            <li><button type= "submit" name="order_action" value="add"><i class = "fa fa-shopping-cart"></i></button></li>
+                            <li><button type = ""><i class = "fa fa-heart"></i></button></li>
+                            <li><button type = ""><i class = "fa fa-retweet"></i></button></li>
+                        </ul>
+                        <button type= "submit" name="order_action" value="add">Add to cart</button>
+                    </div>
+                    <div class = "product__item__text">
+                        <h6><a href = "#">' . $data["product_list"][$i]["name"] . '</a></h6>
+                        <h5>' . $data["product_list"][$i]["price"] . '</h5>
+                        <input type="text" hidden name="product_id" value= "' . $data["product_list"][$i]["id"] . '"</>
+                        <input type="text" hidden name="product_name" value= "' . $data["product_list"][$i]["name"] . '"</>
+                        <input type="text" hidden name="product_image" value= "' . $data["product_list"][$i]["image"] . '"</>
+                        <input type="text" hidden name="product_price" value= "' . $data["product_list"][$i]["price"] . '"</>
+                    </div>
+                </div>
+            </form>
+        </div>-->
+
+    </body>
+
+</html>

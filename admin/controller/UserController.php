@@ -3,6 +3,7 @@
 include_once '../model/UserModel.php';
 include_once '../utils/MySQLUtil.php';
 include_once '../controller/BaseController.php';
+include_once '../utils/DataValidationUtils.php';
 
 class UserController extends BaseController {
 
@@ -10,7 +11,7 @@ class UserController extends BaseController {
         switch ($user_action) { //$user_action == attribute name trong html (in button)
             //các case === attribute value trong html (in button)
             case 'create':
-                $txt_username = $_POST["txt_username"];
+                $txt_username = $_POST["txt_username"]; //attribute name in usercreatepage.php
                 $txt_email = $_POST["txt_email"];
                 $txt_password = md5($_POST["txt_password"]);
                 $txt_bio = $_POST["txt_bio"];
@@ -98,6 +99,13 @@ class UserController extends BaseController {
     public function getAllUser($user) {
         return $user->getAllUser();
     }
+    
+//    public function dataValid($email, $password) {   //toi day roi ne/.......................................
+//        $validData = new DataValidationUtils();
+//        return $validData->checkEmailValid($email) && $validData->checkPasswordValid($password);
+//    }
+    
+    
 
 }
 

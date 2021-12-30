@@ -14,3 +14,5 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="../view/assets/js/dashboard.js"></script> 
+    
+    

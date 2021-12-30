@@ -3,32 +3,33 @@
 
     <head>
         <?php
-        include './layout/head.php';
+        include '../view/layout/head.php';
         ?>
     </head>
 
     <body>
         <!-- Menutop Begin--->
         <?php
-        include './layout/menutop.php';
+        include '../view/layout/menutop.php';
         ?>
         <!-- Menutop End--->
-        
+
         <!-- Menu Navigation Bar Begin-->
         <?php
-        include './layout/menunavigationbar.php';
+        include '../view/layout/menunavigationbar.php';
         ?>
         <!-- Menu Navigation Bar End-->
-        
+
         <!--Searching Area Begin-->
         <?php
-        include './layout/searching.php';
+//        include './layout/searching.php';
+//        
         ?>
         <!--Searching Area End-->
 
-        
+
         <!-- Breadcrumb Section Begin -->
-        <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+        <section class="breadcrumb-section set-bg" data-setbg="../view/img/breadcrumb.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
@@ -62,72 +63,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="shoping__cart__item">
-                                            <img src="img/cart/cart-1.jpg" alt="">
-                                            <h5>Vegetable’s Package</h5>
-                                        </td>
-                                        <td class="shoping__cart__price">
-                                            $55.00
-                                        </td>
-                                        <td class="shoping__cart__quantity">
-                                            <div class="quantity">
-                                                <div class="pro-qty">
-                                                    <input type="text" value="1">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="shoping__cart__total">
-                                            $110.00
-                                        </td>
-                                        <td class="shoping__cart__item__close">
-                                            <span class="icon_close"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="shoping__cart__item">
-                                            <img src="img/cart/cart-2.jpg" alt="">
-                                            <h5>Fresh Garden Vegetable</h5>
-                                        </td>
-                                        <td class="shoping__cart__price">
-                                            $39.00
-                                        </td>
-                                        <td class="shoping__cart__quantity">
-                                            <div class="quantity">
-                                                <div class="pro-qty">
-                                                    <input type="text" value="1">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="shoping__cart__total">
-                                            $39.99
-                                        </td>
-                                        <td class="shoping__cart__item__close">
-                                            <span class="icon_close"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="shoping__cart__item">
-                                            <img src="img/cart/cart-3.jpg" alt="">
-                                            <h5>Organic Bananas</h5>
-                                        </td>
-                                        <td class="shoping__cart__price">
-                                            $69.00
-                                        </td>
-                                        <td class="shoping__cart__quantity">
-                                            <div class="quantity">
-                                                <div class="pro-qty">
-                                                    <input type="text" value="1">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="shoping__cart__total">
-                                            $69.99
-                                        </td>
-                                        <td class="shoping__cart__item__close">
-                                            <span class="icon_close"></span>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                    foreach ($data["current_cart"] as $product) {
+                                        echo'<tr>';
+                                        echo '<td class = "shoping__cart__item">';
+                                        echo '<img src = "'. $product->getImage().'" alt = "">';
+                                        echo '<h5>'. $product->getName().'</h5>';
+                                        echo '</td>';
+                                        echo '<td class = "shoping__cart__price">' . $product->getPrice(). '</td>';
+                                        echo '<td class = "shoping__cart__quantity">';
+                                        echo '<div class = "quantity">';
+                                        echo '<div class = "pro-qty">';
+                                        echo '<input type = "text" value = "'. $product->getNumber().'">';
+                                        echo '</div>';
+                                        echo ' </div>';
+                                        echo ' </td>';
+                                        echo '<td class = "shoping__cart__total">' .$product->getPrice() * $product->getNumber() . '</td>';
+                                        echo '<td class = "shoping__cart__item__close">';
+                                        echo '<span class = "icon_close"></span>';
+                                        echo '</td>';
+                                        echo '</tr>';
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
@@ -169,13 +126,13 @@
 
         <!-- Footer Section Begin -->
         <?php
-        include './layout/footer.php';
+        include '../view/layout/footer.php';
         ?>
         <!-- Footer Section End -->
 
         <!-- Js Plugins -->
         <?php
-        include './layout/script.php';
+        include '../view/layout/script.php';
         ?>
 
     </body>
