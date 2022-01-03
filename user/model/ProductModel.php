@@ -1,25 +1,24 @@
 <?php
+
 include_once '../utils/MySQLUtil.php';
 
 class ProductModel {
+
     private $id;
     private $name;
     private $image;
     private $price;
     private $number;
-  
-    
-    public function __construct($id, $name, $image, $price, $number){
-    {
-       $this->id = $id;
-       $this->name = $name;
-       $this->image = $image;
-       $this->price = $price;
-       $this->number = $number;
+
+    public function __construct($id, $name, $image, $price, $number) { {
+            $this->id = $id;
+            $this->name = $name;
+            $this->image = $image;
+            $this->price = $price;
+            $this->number = $number;
+        }
     }
-        
-    }
-    
+
     public function getId() {
         return $this->id;
     }
@@ -51,7 +50,7 @@ class ProductModel {
     public function setPrice($price): void {
         $this->price = $price;
     }
-     
+
     public function getNumber() {
         return $this->number;
     }
@@ -59,7 +58,7 @@ class ProductModel {
     public function setNumber($number): void {
         $this->number = $number;
     }
-   
+
     //--------------------------------------
     public function getAllProduct() {
         $data = NULL;
@@ -69,7 +68,15 @@ class ProductModel {
         $myDB->disconnectDB();
         return $data;
     }
-    
-    
-    
+
+    public function getProductByPage() {
+        $data = NULL;
+        $myDB = new MySQLUtil();
+        $productPerPage = 3; 
+        $currentPage = ( $_GET['page'] = 1) * $productPerPage;
+        $query = "SELECT * FROM product ORDER BY id DESC LIMIT $currentPage, $productPerPage";
+        $data = $myDB->getAllData($query);
+        return $data;
+    }
+
 }

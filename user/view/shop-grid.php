@@ -206,10 +206,17 @@
                             }
                             ?>
                             <div class="product__pagination">
-                                <a href="#">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                                <?php
+                                $product = new ProductModel("", "", "", "", 0);
+                                $product_all = $product->getAllProduct();
+                                $product_count = count($product_all);
+                                $product_button = $product_count/3;
+                                echo '<p>Page: </p>';
+                                for ($i = 1 ; $i < $product_button; $i++)
+                                {
+                                    echo '<a href = "../controller/OrderController.php?page='. $i . '">' . $i . '</a>';
+                                }     
+                                ?>
                             </div>
                         </div>
                     </div>

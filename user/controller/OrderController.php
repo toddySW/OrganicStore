@@ -38,6 +38,22 @@ class OrderController extends BaseController{
                 $data["current_cart"] = $_SESSION["cart_item"];
                 $this->view("shoping-cart", $data); //basecontroller
                 break;
+            case "remove" :
+                $productID = $_GET["id"];
+//                var_dump($productID);
+                unset($_SESSION["cart_item"][$productID]);
+                if(!empty( $_SESSION["cart_item"])){
+                    header('Location: ../controller/OrderController.php?action=checkout');
+                }else {
+                    header('Location: ../controller/OrderController.php');
+                }
+                break;
+            case "update_cart":
+                //xu ly sau
+            case "page": 
+                //xy ly sau
+                $this->getAllProductByPage($product);    
+                break;
             default :
                 $product = new ProductModel("", "", "", "", 0);
                 $data["product_list"] = $this->getAllProduct($product);
@@ -49,6 +65,10 @@ class OrderController extends BaseController{
     public function getAllProduct($product) {
         return $product->getAllProduct($product);
     }
+    
+//     public function getAllProductByPage($product) {
+//        return $product->getAllProductByPage($product);
+//    }
 }
 
 
@@ -56,9 +76,11 @@ session_start();
 $order_action = "";
 //clear when create user (avoiding to create user twice when reload)
 if (isset($_POST['order_action'])) {
-    $order_action = $_POST['order_action'];
+     $order_action = $_POST['order_action'];
 } else if(isset($_GET['action'])) {
      $order_action = $_GET['action'];
+}else if(isset($_GET['page'])) {
+     $order_action = $_GET['page'];
 }
    
 //rel to constructor

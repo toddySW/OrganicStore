@@ -70,7 +70,7 @@
                                         echo '<img src = "'. $product->getImage().'" alt = "">';
                                         echo '<h5>'. $product->getName().'</h5>';
                                         echo '</td>';
-                                        echo '<td class = "shoping__cart__price">' . $product->getPrice(). '</td>';
+                                        echo '<td class = "shoping__cart__price">'.$product->getPrice().'</td>';
                                         echo '<td class = "shoping__cart__quantity">';
                                         echo '<div class = "quantity">';
                                         echo '<div class = "pro-qty">';
@@ -80,7 +80,7 @@
                                         echo ' </td>';
                                         echo '<td class = "shoping__cart__total">' .$product->getPrice() * $product->getNumber() . '</td>';
                                         echo '<td class = "shoping__cart__item__close">';
-                                        echo '<span class = "icon_close"></span>';
+                                        echo '<a href="../controller/OrderController.php?action=remove&id='.$product->getId().'"><span class = "icon_close"></span></a>';
                                         echo '</td>';
                                         echo '</tr>';
                                     }
@@ -93,9 +93,12 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="shoping__cart__btns">
-                            <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                            <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                                Upadate Cart</a>
+                            <button><a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a></button>
+                            <form action="../controller/OrderController.php" method="POST">
+                                <input name="order_action" value="update_cart" type="submit"/>
+                            </form>
+                            <button><a href="../controller/OrderController.php?action=checkout" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                                Update Cart</a></button>
                         </div>
                     </div>
                     <div class="col-lg-6">
