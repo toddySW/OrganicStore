@@ -1,5 +1,6 @@
 <?php
 include_once '../model/ProductModel.php';
+include_once '../model/OrderModel.php';
 include_once '../controller/BaseController.php';
 
 
@@ -48,8 +49,16 @@ class OrderController extends BaseController{
                     header('Location: ../controller/OrderController.php');
                 }
                 break;
+            case "order":
+                $order = new OrderModel("", "", "", "0355751191");
+                $maxID = $this->createOrder($order) + 1;
+                $orderID = $order->getUserID() . $maxID;
+                //Insert Order
+                //Insert Orderdatail //toi day roi ne--------------------------------
+                die;
+                break;
             case "update_cart":
-                //xu ly sau
+                //xu ly sau by ajax
             case "page": 
                 //xy ly sau
                 $this->getAllProductByPage($product);    
@@ -64,6 +73,10 @@ class OrderController extends BaseController{
 
     public function getAllProduct($product) {
         return $product->getAllProduct($product);
+    }
+    
+    public function createOrder($order) {
+        return $order->getMaxOrderID();
     }
     
 //     public function getAllProductByPage($product) {

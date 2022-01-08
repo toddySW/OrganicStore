@@ -22,8 +22,8 @@
          
         <!--Searching Area Begin-->
         <?php
-        include './layout/searching.php';
-        ?>
+//        include './layout/searching.php';
+//        ?>
         <!--Searching Area End-->
 
        

@@ -75,4 +75,10 @@ class MySQLUtil {
         return $stmt->rowCount();
     }
 
+    public function getMaxID($query, $para = array()) {
+        $stmt = self::$conn->prepare($query);
+        $stmt->execute($para);
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
 }

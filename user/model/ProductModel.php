@@ -68,15 +68,23 @@ class ProductModel {
         $myDB->disconnectDB();
         return $data;
     }
-
-    public function getProductByPage() {
-        $data = NULL;
+    
+    public function getProductByID($id) {
         $myDB = new MySQLUtil();
-        $productPerPage = 3; 
-        $currentPage = ( $_GET['page'] = 1) * $productPerPage;
-        $query = "SELECT * FROM product ORDER BY id DESC LIMIT $currentPage, $productPerPage";
-        $data = $myDB->getAllData($query);
+        $query = "SELECT id, name, image, price, quantity FROM product WHERE id=:id";
+        $para = array(":id" => $id);
+        $data = $myDB->getData($query, $para);
+        $myDB->disconnectDB();
         return $data;
     }
 
+//    public function getProductByPage() {
+//        $data = NULL;
+//        $myDB = new MySQLUtil();
+//        $productPerPage = 3; 
+//        $currentPage = ( $_GET['page'] = 1) * $productPerPage;
+//        $query = "SELECT * FROM product ORDER BY id DESC LIMIT $currentPage, $productPerPage";
+//        $data = $myDB->getAllData($query);
+//        return $data;
+//    }
 }
