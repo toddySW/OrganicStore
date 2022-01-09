@@ -14,7 +14,8 @@ class OrderController extends BaseController{
                 $product_name = $_POST["product_name"];
                 $product_image = $_POST["product_image"];
                 $product_price= $_POST["product_price"];
-                $product = new ProductModel($product_id, $product_name, $product_image, $product_price, 1);
+                $product_quantity = $_POST["product_quantity"];
+                $product = new ProductModel($product_id, $product_name, $product_image, $product_price, $product_quantity, 1);
                 
 //            SESSION       
                 if (!empty( $_SESSION["cart_item"])) {
@@ -57,14 +58,13 @@ class OrderController extends BaseController{
                 //Insert Orderdatail //toi day roi ne--------------------------------
                 die;
                 break;
-            case "update_cart":
-                //xu ly sau by ajax
+            
             case "page": 
                 //xy ly sau
                 $this->getAllProductByPage($product);    
                 break;
             default :
-                $product = new ProductModel("", "", "", "", 0);
+                $product = new ProductModel("", "", "", "", "",0);
                 $data["product_list"] = $this->getAllProduct($product);
                 $this->view("shop-grid", $data); //basecontroller
                 break;
@@ -82,6 +82,7 @@ class OrderController extends BaseController{
 //     public function getAllProductByPage($product) {
 //        return $product->getAllProductByPage($product);
 //    }
+    
 }
 
 

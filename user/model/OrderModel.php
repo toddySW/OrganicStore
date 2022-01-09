@@ -3,7 +3,7 @@ include_once '../utils/MySQLUtil.php';
 
 class OrderModel {
     private $orderID;
-    private  $amount;
+    private $amount;
     private $status; 
     private $userID;
     

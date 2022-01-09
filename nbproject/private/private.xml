@@ -5,11 +5,8 @@
         <group>
             <file>file:/C:/xampp1/htdocs/tolambangduy/user/view/shoping-cart.php</file>
             <file>file:/C:/xampp1/htdocs/tolambangduy/user/utils/MySQLUtil.php</file>
-            <file>file:/C:/xampp1/htdocs/tolambangduy/admin/model/UserModel.php</file>
             <file>file:/C:/xampp1/htdocs/tolambangduy/user/model/ProductModel.php</file>
-            <file>file:/C:/xampp1/htdocs/tolambangduy/user/view/getQuantityProductAjax.php</file>
             <file>file:/C:/xampp1/htdocs/tolambangduy/user/controller/OrderController.php</file>
-            <file>file:/C:/xampp1/htdocs/tolambangduy/user/model/OrderModel.php</file>
         </group>
     </open-files>
 </project-private>

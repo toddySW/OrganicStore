@@ -65,20 +65,20 @@
                                 <tbody>
                                     <?php
                                     $total = 0;
-                                    foreach ($data["current_cart"] as $product) {
+                                    foreach ($data["current_cart"] as $key => $product) {
                                         echo' <tr class="cart_item" id="' . $product->getId() . '">';
                                         echo '<td class = "shoping__cart__item">';
                                         echo '<img src = "' . $product->getImage() . '" alt = "">';
                                         echo '<h5>' . $product->getName() . '</h5>';
                                         echo '</td>';
 
-                                        echo '<td class = "shoping__cart__price">' . number_format($product->getPrice()) . '</td>';
+                                        echo '<td class = "shoping__cart__price">$' . number_format($product->getPrice()) . '</td>';                  
 
-                                 
-                                        echo '<td class = "shoping__cart__quantity"><input type="number" value="' . $product->getNumber() . '" id="hello"' . $product->getId() . ' min="0">';
+                                        echo '<td class = "shoping__cart__quantity">';
+                                        echo '<input type="number" value="' . $product->getNumber() . '" id="hello" min="0">';
                                         echo '</td>';
 
-                                        echo '<td class = "shoping__cart__total">' . number_format($product->getPrice() * $product->getNumber()) . '</td>';
+                                        echo '<td class = "shoping__cart__total">$' . number_format($product->getPrice() * $product->getNumber()) . '</td>';
 
                                         echo '<td class = "shoping__cart__item__close">';
                                         echo '<a href="../controller/OrderController.php?action=remove&id=' . $product->getId() . '"><span class = "icon_close"></span></a>';
@@ -119,8 +119,8 @@
                         <div class="shoping__checkout">
                             <h5>Cart Total</h5>
                             <ul>
-                                <li>Subtotal <span><?php echo number_format($total) ?> </span></li>
-                                <li>Total <span><?php echo number_format($total) ?></span></li>
+                                <li>Subtotal <span><?php echo '$'. number_format($total)?> </span></li>
+                                <li>Total <span id="ttp"><?php echo '$'. number_format($total) ?></span></li>
                             </ul>
                             <a href="../controller/OrderController.php?action=order" class="primary-btn">PROCEED TO CHECKOUT</a>
                         </div>
@@ -158,7 +158,7 @@
 
 
         <!--        AJAX JQuery: Get limit quantity of products ......................................  --> 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
             $(document).ready(function () {
                 $('.shoping__cart__quantity').click(function () {
@@ -174,14 +174,47 @@
                             },
                             success: function (data) {
 //                            $('#txtHint').val(data);
-                                $('#hello').attr("max", data);
+                                $('#hello').attr("max", data.trim());
                             },
                             type: 'GET'
                         });
                     });
                 });
             });
-        </script>
+            </script>-->
+
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.cart_item').click(function(e) {
+                var id = $(this).attr("id");
+                $(e.target).change(function() {
+                    e.target.attributes["value"].value = $($(this)).val();
+                });
+                if (e.target.tagName == "INPUT") {
+                    // console.log(e.target.parentNode.attributes[0].ownerElement.parentNode.attributes[0].ownerElement.children[1].innerText);
+                    e.target.parentNode.attributes[0].ownerElement.parentNode.attributes[0].ownerElement.children[3].innerText = "$" + Number(e.target.parentNode.attributes[0].ownerElement.parentNode.attributes[0].ownerElement.children[1].innerText.substring(1)) * e.target.attributes["value"].value;
+                    var query = document.querySelectorAll('.shoping__cart__total');
+                    let x = 0;
+                    query.forEach(i => {
+                        x += parseInt(i.innerText.trim().substring(1));
+                    });
+                    $('#ttp').text("$" + x);
+                    $.ajax({
+                        url: '../view/getQuantityProductAjax.php',
+                        data: {
+                            id: id
+                        },
+                        success: function(data) {
+                            $(e.target).attr("max", data.trim());
+                            // $('.shoping__cart__total').text(parseInt(p) * a);
+                        },
+                        type: 'GET'
+                    });
+                }
+            });
+        });
+    </script>
         <!--       END AJAX JQuery: Get limit quantity of products .....................................--> 
 
     </body>

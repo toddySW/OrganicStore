@@ -8,13 +8,15 @@ class ProductModel {
     private $name;
     private $image;
     private $price;
-    private $number;
-
-    public function __construct($id, $name, $image, $price, $number) { {
+    private $quantity;
+    private $number;    
+    
+    public function __construct($id, $name, $image, $price, $quantity, $number) { {
             $this->id = $id;
             $this->name = $name;
             $this->image = $image;
             $this->price = $price;
+            $this->quantity = $quantity;
             $this->number = $number;
         }
     }
@@ -50,6 +52,14 @@ class ProductModel {
     public function setPrice($price): void {
         $this->price = $price;
     }
+    
+    public function getQuantity() {
+        return $this->quantity;
+    }
+
+    public function setQuantity($quantity): void {
+        $this->quantity = $quantity;
+    }
 
     public function getNumber() {
         return $this->number;
@@ -63,12 +73,21 @@ class ProductModel {
     public function getAllProduct() {
         $data = NULL;
         $myDB = new MySQLUtil();
-        $query = "SELECT id, name, image, price FROM product";
+        $query = "SELECT id, name, image, price, quantity FROM product";
         $data = $myDB->getAllData($query);
         $myDB->disconnectDB();
         return $data;
     }
     
+    public function updateCart($id, $quantity) {
+        $myDB = new MySQLUtil();
+        $query = "UPDATE product SET quantity=:quantity WHERE id=:id";
+        $para = array(":id"=>$this->getId(), ":quantity"=>$this->getQuantity());
+        $myDB->updateData($query, $para);
+        $myDB->disconnectDB();
+    }
+
+
     public function getProductByID($id) {
         $myDB = new MySQLUtil();
         $query = "SELECT id, name, image, price, quantity FROM product WHERE id=:id";

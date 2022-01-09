@@ -207,7 +207,7 @@
                             ?>
                             <div class="product__pagination">
                                 <?php
-                                $product = new ProductModel("", "", "", "", 0);
+                                $product = new ProductModel("", "", "", "", "", 0);
                                 $product_all = $product->getAllProduct();
                                 $product_count = count($product_all);
                                 $product_button = $product_count/3;
