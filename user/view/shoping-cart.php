@@ -65,6 +65,8 @@
                                 <tbody>
                                     <?php
                                     $total = 0;
+                                    if ($data["current_cart"]!= null) {
+                                     
                                     foreach ($data["current_cart"] as $key => $product) {
                                         echo' <tr class="cart_item" id="' . $product->getId() . '">';
                                         echo '<td class = "shoping__cart__item">';
@@ -72,7 +74,7 @@
                                         echo '<h5>' . $product->getName() . '</h5>';
                                         echo '</td>';
 
-                                        echo '<td class = "shoping__cart__price">$' . number_format($product->getPrice()) . '</td>';                  
+                                        echo '<td class = "shoping__cart__price">$' . number_format($product->getPrice()) . '</td>';
 
                                         echo '<td class = "shoping__cart__quantity">';
                                         echo '<input type="number" value="' . $product->getNumber() . '" id="hello" min="0">';
@@ -87,6 +89,9 @@
                                         echo '</tr>';
                                         $total += $product->getNumber() * $product->getPrice();
                                     }
+                                    }else{
+                                        echo '<script>window.location.href="../controller/OrderController.php"</script>';
+                                    }
                                     ?>
                                 </tbody>
                             </table>
@@ -94,16 +99,6 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="shoping__cart__btns">
-                            <button><a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a></button>
-                            <form action="../controller/OrderController.php" method="POST">
-                                <input name="order_action" value="update_cart" type="submit"/>
-                            </form>
-                            <button><a href="../controller/OrderController.php?action=checkout" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                                    Update Cart</a></button>
-                        </div>
-                    </div>
                     <div class="col-lg-6">
                         <div class="shoping__continue">
                             <div class="shoping__discount">
@@ -119,9 +114,10 @@
                         <div class="shoping__checkout">
                             <h5>Cart Total</h5>
                             <ul>
-                                <li>Subtotal <span><?php echo '$'. number_format($total)?> </span></li>
-                                <li>Total <span id="ttp"><?php echo '$'. number_format($total) ?></span></li>
+                                <li>Subtotal <span><?php echo '$' . number_format($total) ?> </span></li>
+                                <li>Total <span id="ttp"><?php echo '$' . number_format($total) ?></span></li>
                             </ul>
+                            <!--                            <button type="button" id="checkout" class="primary-btn">PROCEED TO CHECKOUT</button>-->
                             <a href="../controller/OrderController.php?action=order" class="primary-btn">PROCEED TO CHECKOUT</a>
                         </div>
                     </div>
@@ -183,40 +179,51 @@
             });
             </script>-->
 
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.cart_item').click(function(e) {
-                var id = $(this).attr("id");
-                $(e.target).change(function() {
-                    e.target.attributes["value"].value = $($(this)).val();
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.cart_item').click(function (e) {
+                    var id = $(this).attr("id");
+                    $(e.target).change(function () {
+                        e.target.attributes["value"].value = $($(this)).val();
+                    });
+                    if (e.target.tagName == "INPUT") {
+                        // console.log(e.target.parentNode.attributes[0].ownerElement.parentNode.attributes[0].ownerElement.children[1].innerText);
+                        e.target.parentNode.attributes[0].ownerElement.parentNode.attributes[0].ownerElement.children[3].innerText = "$" + Number(e.target.parentNode.attributes[0].ownerElement.parentNode.attributes[0].ownerElement.children[1].innerText.substring(1)) * e.target.attributes["value"].value;
+                        var query = document.querySelectorAll('.shoping__cart__total');
+                        let x = 0;
+                        query.forEach(i => {
+                            x += parseInt(i.innerText.trim().substring(1));
+                        });
+                        $('#ttp').text("$" + x);
+                        $.ajax({
+                            url: '../view/getQuantityProductAjax.php',
+                            data: {
+                                id: id
+                            },
+                            success: function (data) {
+                                $(e.target).attr("max", data.trim());
+                                // $('.shoping__cart__total').text(parseInt(p) * a);
+                            },
+                            type: 'GET'
+                        });
+                    }
                 });
-                if (e.target.tagName == "INPUT") {
-                    // console.log(e.target.parentNode.attributes[0].ownerElement.parentNode.attributes[0].ownerElement.children[1].innerText);
-                    e.target.parentNode.attributes[0].ownerElement.parentNode.attributes[0].ownerElement.children[3].innerText = "$" + Number(e.target.parentNode.attributes[0].ownerElement.parentNode.attributes[0].ownerElement.children[1].innerText.substring(1)) * e.target.attributes["value"].value;
-                    var query = document.querySelectorAll('.shoping__cart__total');
-                    let x = 0;
-                    query.forEach(i => {
-                        x += parseInt(i.innerText.trim().substring(1));
-                    });
-                    $('#ttp').text("$" + x);
-                    $.ajax({
-                        url: '../view/getQuantityProductAjax.php',
-                        data: {
-                            id: id
-                        },
-                        success: function(data) {
-                            $(e.target).attr("max", data.trim());
-                            // $('.shoping__cart__total').text(parseInt(p) * a);
-                        },
-                        type: 'GET'
-                    });
-                }
+//                $('#checkout').click(function () {
+//                    $.ajax({
+//                        url: '',
+//                        data: {
+//                            action: 'order'
+//                        },
+//                        success: function (data) {
+//                            window.location.reload();
+//                        },
+//                        type: 'GET'
+//                    });
+//                });
             });
-        });
-    </script>
+        </script>
         <!--       END AJAX JQuery: Get limit quantity of products .....................................--> 
-
     </body>
 
 </html>

@@ -34,13 +34,13 @@
 <!--                watch out-->
                 <form class="pt-3" action="../controller/UserController.php" method="POST">
                   <div class="form-group">
-                    <input type="email" name="txt_email" class="form-control form-control-lg" id="txt_email" placeholder="Email">
+                    <input type="email" name="txt_email" class="form-control form-control-lg" id="userlogin_txt_email" placeholder="Email">
                   </div>
                   <div class="form-group">
-                      <input type="password" name="txt_password" class="form-control form-control-lg" id="txt_password" placeholder="Password">
+                      <input type="password" name="txt_password" class="form-control form-control-lg" id="userlogin_txt_password" placeholder="Password">
                   </div>
                   <div class="mt-3">
-                      <button type="submit" name="user_action" value="login">SIGN IN</button>
+                      <button type="submit" id="btn-test" name="user_action" value="login">SIGN IN</button>
                   </div>
                   <div class="my-2 d-flex justify-content-between align-items-center">
                     <div class="form-check">

@@ -15,4 +15,17 @@
     <!-- Custom js for this page -->
     <script src="../view/assets/js/dashboard.js"></script> 
     
-    
+    <script>
+        $(document).ready(function() {
+            $("#btn-test").click(function (){
+                var numbers = $("#txt_email").val();
+                var filter = /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix;
+                 $abc = $.trim(numbers).match(filter) ? true : false;
+                 
+                 if(!$abc) {
+                     e.preventDefault();
+                     alert("K Hop le");
+                 }
+            });
+        });
+    </script>

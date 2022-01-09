@@ -1,21 +1,22 @@
 <?php
+
 include_once '../utils/MySQLUtil.php';
 
 class OrderModel {
+
     private $orderID;
     private $amount;
-    private $status; 
+    private $status;
     private $userID;
-    
-    public function __construct($orderID, $amount, $status, $userID){
-    {
+
+    public function __construct($orderID, $amount, $status, $userID) { {
             $this->orderID = $orderID;
             $this->amount = $amount;
             $this->status = $status;
             $this->userID = $userID;
+        }
     }
-        
-    }
+
     public function getOrderID() {
         return $this->orderID;
     }
@@ -47,7 +48,7 @@ class OrderModel {
     public function setUserID($userID): void {
         $this->userID = $userID;
     }
-    
+
     public function createOrder() {
         $myDB = new MySQLUtil();
         $query = "INSERT INTO orders (orderID, amount, status, userID) VALUES (:orderID, :amount, :status, :userID)";
@@ -55,18 +56,18 @@ class OrderModel {
         $myDB->insertData($query, $para);
         $myDB->disconnectDB();
     }
-    
+
     public function getMaxOrderID() {
         $data = 0;
         $myDB = new MySQLUtil();
-        $query = "SELECT max(id) FROM orders WHERE userID =:userID";
-        $para = array (":userID" => $this->getUserID());
+        $query = "SELECT count(id) FROM orders WHERE userID =:userID";
+        $para = array(":userID" => $this->getUserID());
         $data = $myDB->getMaxID($query, $para);
         $myDB->disconnectDB();
-        if (is_null($data[0]["maxID"])){
+        if (is_null($data[0]["count(id)"])) {
             return 0;
-        }else {
-            return $data[0]["maxID"];
+        } else {
+            return $data[0]["count(id)"];
         }
         return $data;
     }

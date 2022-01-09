@@ -26,40 +26,46 @@ class UserController extends BaseController {
                 $txt_username = $_POST["txt_username"];
                 $txt_email = $_POST["txt_email"];
                 $txt_password = md5($_POST["txt_password"]);
-                $txt_bio = $_POST["txt_bio"]; 
+                $txt_bio = $_POST["txt_bio"];
                 $user = new UserModel($txt_username, $txt_email, $txt_password, $txt_bio, $txt_userid);
-               
+
                 $this->editUser($user);
                 header('Location: ../controller/UserController.php');
                 break;
-            case 'getedit': 
+            case 'getedit':
                 $id = $_GET["id"]; //lay ID 
                 $user = new UserModel("", "", "", "", $id);
                 $data['user_info'] = $this->getUser($user, "id");
                 $this->view('usereditpage', $data); //kế thừa lớp view ở BaseController
                 break;
-            case 'delete': 
+            case 'delete':
                 $id = $_GET["id"]; //lay ID 
                 $user = new UserModel("", "", "", "", $id);
                 $data['user_info'] = $this->deleteUser($user, "id");
                 header('Location: ../controller/UserController.php');
                 break;
-            case 'login': 
+            case 'login':
+//                $userlogin_txt_email = $_POST["userlogin_txt_email"];
+//                $userlogin_txt_password = md5($_POST["userlogin_txt_email"]);
+//                if ($this->dataValid($userlogin_txt_email, $userlogin_txt_password)) {
+//                    $user = new UserModel("", $userlogin_txt_email, $userlogin_txt_email, "", "");
+//                    $data = $this->getUser($user, "email");
+//                }
+                
                 $txt_email = $_POST["txt_email"];
                 $txt_password = md5($_POST["txt_password"]);
-                
-                $user = new UserModel("", $txt_email, $txt_password, "", "");
-                
+                $user = new UserModel("", $txt_email, $txt_password, "", "");                    
                 $data = $this->getUser($user, "email");
+
                 if ($data["email"] == $txt_email && $data["userpassword"] == $txt_password) {
                     //session 
-                    session_start(); 
+                    session_start();
                     $_SESSION["email"] = $txt_email;
                     $_SESSION["isLogin"] == true;
                     header('Location: ../controller/UserController.php');
                 } else {
-                   header('Location: ../view/login.php');
-                } 
+                    header('Location: ../view/login.php');
+                }
                 break;
             case 'logout':
                 session_start();
@@ -83,15 +89,15 @@ class UserController extends BaseController {
     public function editUser($user) {
         $user->updateUser();
     }
-    
-     public function deleteUser($user) {
+
+    public function deleteUser($user) {
         $user->deleteUser();
     }
 
     public function getUser($user, $type) {
         if ($type == "id") {
             return $user->getUserByID();
-        }else {
+        } else {
             return $user->getUserByEmail();
         }
     }
@@ -99,13 +105,11 @@ class UserController extends BaseController {
     public function getAllUser($user) {
         return $user->getAllUser();
     }
-    
+
 //    public function dataValid($email, $password) {   //toi day roi ne/.......................................
 //        $validData = new DataValidationUtils();
 //        return $validData->checkEmailValid($email) && $validData->checkPasswordValid($password);
 //    }
-    
-    
 
 }
 
@@ -114,11 +118,10 @@ $user_action = "";
 //clear when create user (avoiding to create user twice when reload)
 if (isset($_POST['user_action'])) {
     $user_action = $_POST['user_action'];
-} else if (isset ($_GET['action'])) {
+} else if (isset($_GET['action'])) {
     $user_action = $_GET['action'];
 }
 
 //rel to constructor
 $userController = new UserController($user_action);
-
 

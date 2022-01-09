@@ -15,10 +15,10 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__right">
                         <?php
-                        if (isset($_SESSION["user"])) {
+                        if (isset($_SESSION["email"])) {
 
                             echo '<div class = "nav-profile-text">';
-                            echo '<p class="mb-1 text-black">WELCOME ' . $_SESSION["user"]["email"] . '</p>';
+                            echo '<p class="mb-1 text-black">WELCOME ' . $_SESSION["email"] . '</p>';
                             echo '</div>';
                             
                             echo '<div class="header__top__right__auth">';
