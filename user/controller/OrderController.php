@@ -1,8 +1,8 @@
 <?php
 include_once '../model/ProductModel.php';
 include_once '../model/OrderModel.php';
+include_once '../model/UserModel.php';
 include_once '../controller/BaseController.php';
-
 
 
 class OrderController extends BaseController{
@@ -58,10 +58,32 @@ class OrderController extends BaseController{
                 //Insert Orderdatail //toi day roi ne--------------------------------
                 die;
                 break;
-            
             case "page": 
                 //xy ly sau
                 $this->getAllProductByPage($product);    
+                break;
+            case "signin":
+                $txt_email = $_POST["txt_email"];
+                $txt_password = md5($_POST["txt_password"]);
+                
+                $user = new UserModel("", $txt_email, $txt_password, "", "");
+                $data = $this->getUser($user, "email");
+                
+                 if ($data["email"] == $txt_email && $data["userpassword"] == $txt_password) {
+                    //session 
+                    session_start(); 
+                    $_SESSION["user"]["email"] = $txt_email;
+                   // $_SESSION["isLogin"] == true;
+                    header('Location: ../controller/OrderController.php');
+                } else {
+                   header('Location: ../view/signin.php');
+                } 
+                break;
+            case 'signout':
+                session_start();
+                session_unset("user");
+                session_destroy();
+                header('Location: ../view/signin.php');
                 break;
             default :
                 $product = new ProductModel("", "", "", "", "",0);
@@ -77,6 +99,15 @@ class OrderController extends BaseController{
     
     public function createOrder($order) {
         return $order->getMaxOrderID();
+    }
+    
+    //-------------------------------------------
+    public function getUser($user, $type) {
+        if ($type == "id") {
+            return $user->getUserByID();
+        }else {
+            return $user->getUserByEmail();
+        }
     }
     
 //     public function getAllProductByPage($product) {

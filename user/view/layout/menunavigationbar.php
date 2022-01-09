@@ -1,4 +1,5 @@
 <!-- Header Section Begin -->
+
 <header class="header">
     <div class="header__top">
         <div class="container">
@@ -13,20 +14,27 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__right">
-                        <div class="header__top__right__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                        </div>
+                        <?php
+                        if (isset($_SESSION["user"])) {
 
-                        <div class="header__top__right__auth">
-                            <a href="../view/signup.php"><i class="fa fa-user-plus"></i>Sign up</a>
-                        </div>
+                            echo '<div class = "nav-profile-text">';
+                            echo '<p class="mb-1 text-black">WELCOME ' . $_SESSION["user"]["email"] . '</p>';
+                            echo '</div>';
+                            
+                            echo '<div class="header__top__right__auth">';
+                            echo '<a href = "../view/signin.php"><i class = "fa fa-user-plus"></i>Sign out</a>';
+                            echo ' </div>';
+                            
+                        } else {
+                            echo '<div class="header__top__right__auth">';
+                            echo ' <a href = "../view/signup.php"><i class = "fa fa-user-plus"></i>Sign up</a>';
+                            echo '   </div>';
 
-                        <div class="header__top__right__auth">
-                            <a href="../view/signin.php"><i class="fa fa-user"></i>Sign in</a>
-                        </div>
+                            echo ' <div class = "header__top__right__auth">';
+                            echo ' <a href="../view/signin.php"><i class="fa fa-user"></i>Sign in</a>';
+                            echo ' </div>';
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -62,10 +70,10 @@
                 <div class="header__cart">
                     <ul>
                         <?php
-                        if(!empty($_SESSION["cart_item"])){
-                             echo '<li><a href = "../controller/OrderController.php?action=checkout"><i class = "fa fa-shopping-bag"></i> <span>' . count($_SESSION["cart_item"]) . '</span></a></li>';
+                        if (!empty($_SESSION["cart_item"])) {
+                            echo '<li><a href = "../controller/OrderController.php?action=checkout"><i class = "fa fa-shopping-bag"></i> <span>' . count($_SESSION["cart_item"]) . '</span></a></li>';
                         } else {
-                             echo '<li><a href = "../controller/OrderController.php"><i class = "fa fa-shopping-bag"></i> <span>0</span></a></li>';
+                            echo '<li><a href = "../controller/OrderController.php"><i class = "fa fa-shopping-bag"></i> <span>0</span></a></li>';
                         }
                         ?>
                     </ul>

@@ -17,7 +17,6 @@
         <div class="header__cart__price">item: <span>$150.00</span></div>
     </div>
     <div class="humberger__menu__widget">
-
         <div class="header__top__right__auth">
             <a href="#"><i class="fa fa-user"></i> Sign up</a>
         </div>
