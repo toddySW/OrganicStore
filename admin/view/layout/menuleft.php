@@ -14,6 +14,21 @@
                 </ul>
             </div>
         </li>
+        
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                <span class="icon-bg"><i class="mdi mdi-lock menu-icon"></i></span>
+                <span class="menu-title">Quản lý Products</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="auth">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="../controller/ProductController.php"> Danh sách sản phẩm </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="../view/productcreatepage.php"> Thêm người sản phẩm </a></li>
+                </ul>
+            </div>
+        </li>
+        
         <li class="nav-item documentation-link">
             <a class="nav-link" href="http://www.bootstrapdash.com/demo/connect-plus-free/jquery/documentation/documentation.html" target="_blank">
                 <span class="icon-bg">

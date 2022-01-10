@@ -9,8 +9,8 @@ class ProductModel {
     private $image;
     private $price;
     private $quantity;
-    private $number;    
-    
+    private $number;
+
     public function __construct($id, $name, $image, $price, $quantity, $number) { {
             $this->id = $id;
             $this->name = $name;
@@ -52,7 +52,7 @@ class ProductModel {
     public function setPrice($price): void {
         $this->price = $price;
     }
-    
+
     public function getQuantity() {
         return $this->quantity;
     }
@@ -78,15 +78,14 @@ class ProductModel {
         $myDB->disconnectDB();
         return $data;
     }
-    
+
     public function updateCart($id, $quantity) {
         $myDB = new MySQLUtil();
         $query = "UPDATE product SET quantity=:quantity WHERE id=:id";
-        $para = array(":id"=>$this->getId(), ":quantity"=>$this->getQuantity());
+        $para = array(":id" => $this->getId(), ":quantity" => $this->getQuantity());
         $myDB->updateData($query, $para);
         $myDB->disconnectDB();
     }
-
 
     public function getProductByID($id) {
         $myDB = new MySQLUtil();
@@ -97,13 +96,13 @@ class ProductModel {
         return $data;
     }
 
-//    public function getProductByPage() {
-//        $data = NULL;
-//        $myDB = new MySQLUtil();
-//        $productPerPage = 3; 
-//        $currentPage = ( $_GET['page'] = 1) * $productPerPage;
-//        $query = "SELECT * FROM product ORDER BY id DESC LIMIT $currentPage, $productPerPage";
-//        $data = $myDB->getAllData($query);
-//        return $data;
-//    }
+    public function getAllProductLimit($limit, $page) {
+        $data = NULL;
+        $myDB = new MySQLUtil();
+        $query = "SELECT * FROM product ORDER BY id ASC LIMIT " . $limit . " OFFSET " . $page;
+        $data = $myDB->getAllData($query);
+        $myDB->disconnectDB();
+        return $data;
+    }
+
 }

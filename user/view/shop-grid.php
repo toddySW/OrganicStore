@@ -210,7 +210,7 @@
                                 $product = new ProductModel("", "", "", "", "", 0);
                                 $product_all = $product->getAllProduct();
                                 $product_count = count($product_all);
-                                $product_button = $product_count/3;
+                                $product_button = $product_count/4;
                                 echo '<p>Page: </p>';
                                 for ($i = 1 ; $i < $product_button; $i++)
                                 {

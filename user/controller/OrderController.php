@@ -101,15 +101,24 @@ class OrderController extends BaseController {
                 header('Location: ../view/signin.php');
                 break;
             default :
-                $product = new ProductModel("", "", "", "", "", 0);
-                $data["product_list"] = $this->getAllProduct($product);
+//                $product = new ProductModel("", "", "", "", "", 0);
+//                $data["product_list"] = $this->getAllProduct($product);
+//                $this->view("shop-grid", $data); //basecontroller
+//                break;
+                if (isset($_GET['page'])) {
+                    $offset = ($_GET['page'] - 1) * 6;
+                } else {
+                    $offset = 0;
+                }
+                $product = new productModel("", "", "", "", "", 0);
+                $data['product_list'] = $this->getAllProduct($product, 6, $offset);
                 $this->view("shop-grid", $data); //basecontroller
                 break;
         }
     }
 
-    public function getAllProduct($product) {
-        return $product->getAllProduct($product);
+    function getAllProduct($product, $limit, $page = 0) {
+        return $product->getAllProductLimit($limit, $page);
     }
 
     public function createOrder($order) {
