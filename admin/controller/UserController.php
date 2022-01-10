@@ -106,11 +106,6 @@ class UserController extends BaseController {
         return $user->getAllUser();
     }
 
-//    public function dataValid($email, $password) {   //toi day roi ne/.......................................
-//        $validData = new DataValidationUtils();
-//        return $validData->checkEmailValid($email) && $validData->checkPasswordValid($password);
-//    }
-
 }
 
 //------------------------------------------------------------------------------

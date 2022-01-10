@@ -45,10 +45,12 @@
                                             <tbody>
                                                 <?php
                                                 $page = array(1);
-                                                for ($i = 0; $i < count($data["product_list"]); $i++) {
-                                                    if ($i % 7 == 0) {
+                                                for ($i = 1; $i < count($data["product"]); $i++) {
+                                                    if ($i % 6 == 0) {
                                                         $page[] = end($page) + 1;
                                                     }
+                                                }
+                                                for ($i = 0; $i < count($data["product_list"]); $i++) {
                                                     if (!empty($data['product_list'][$i]['name'])) {
                                                         echo '<tr>';
                                                         echo '<th scope="row">' . ($i + 1) . '</th>';
@@ -58,7 +60,7 @@
                                                         echo '<td>' . $data['product_list'][$i]['quantity'] . '</td>';
                                                         //getID --> editUser
 //                                                        echo '<td><a href="../controller/ProductController.php?action=getedit&id=' . $data['user_list'][$i]['ID'] . '" class="btn btn-success">Edit</a></td>';
-//                                                        echo '<td><a href="../controller/ProductController.php?action=delete&id=' . $data['user_list'][$i]['ID'] . '" class="btn btn-danger">Delete</a></td>';
+                                                        echo '<td><a href="../controller/ProductController.php?action=delete&id=' . $data['product_list'][$i]['id'] . '" class="btn btn-danger">Delete</a></td>';
                                                         echo '</tr>';
                                                     }
                                                 }
@@ -69,7 +71,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <ul class="pagination pg-primary justify-content-center">
                             <?php
                             for ($i = 1; $i <= count($page); $i++) {

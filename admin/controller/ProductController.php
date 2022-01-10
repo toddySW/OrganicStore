@@ -16,6 +16,13 @@ class ProductController extends BaseController {
                 $product = new ProductModel($txt_productname, "", $txt_price, $txt_quantity);
                 header('Location: ../controller/ProductController.php');
                 break;
+            case 'delete':
+                $id = $_GET["id"]; //lay ID 
+                $product = new ProductModel("", "", "", "", $id);
+                $data['product_info'] = $this->deleteProduct($product, "id");
+                header('Location: ../controller/ProductController.php');
+
+                break;
             default:
                 if (isset($_GET['page'])) {
                     $offset = ($_GET['page'] - 1) * 6;
@@ -23,18 +30,27 @@ class ProductController extends BaseController {
                     $offset = 0;
                 }
                 $product = new productModel("", "", "", "", 0);
-                $data['product_list'] = $this->getAllProduct($product, 6, $offset);
+                $data["product"] = $this->getAllProduct($product);
+                $data['product_list'] = $this->getAllProductLimit($product, 6, $offset);
                 $this->view("productlistpage", $data); //basecontroller
                 break;
         }
     }
 
-    function getAllProduct($product, $limit, $page = 0) {
+    function getAllProductLimit($product, $limit, $page = 0) {
         return $product->getAllProductLimit($limit, $page);
     }
 
+    function getAllProduct($product) {
+        return $product->getAllProduct();
+    }
+
     public function insertProduct($product) {
-        return $product->insertProduct();
+        $product->insertProduct();
+    }
+
+    public function deleteProduct($product) {
+        $product->deleteProduct();
     }
 
 }

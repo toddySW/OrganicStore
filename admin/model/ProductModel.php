@@ -10,11 +10,12 @@ class ProductModel {
     private $price;
     private $quantity;
 
-    public function __construct($name, $image, $price, $quantity) {
-        $this->name = $name;
+    public function __construct($image, $name, $price, $quantity, $productID) {
         $this->image = $image;
+        $this->name = $name;
         $this->price = $price;
         $this->quantity = $quantity;
+        $this->productID = $productID;
     }
 
     public function __destruct() {
@@ -78,14 +79,22 @@ class ProductModel {
     public function insertProduct() {
         $myDB = new MySQLUtil();
 
-        $query = "INSERT INTO product (name, image, price, quantity) VALUES (:name, :image, :price, :quantity";
+        $query = "INSERT INTO product (name, image, price, quantity) VALUES (:name, :image, :price, :quantity)";
         $para = array(":name" => $this->getName(), ":image" => $this->getImage(), ":price" => $this->getPrice(), ":quantity" => $this->getQuantity());
         $myDB->insertData($query, $para);
         $myDB->disconnectDB();
     }
-    
-    public function getAllProductLimit($limit, $page)
-    {
+
+    public function deleteProduct() {
+        $myDB = new MySQLUtil();
+
+        $query = "DELETE FROM product WHERE id=:id";
+        $para = array(":id" => $this->getProductID());
+        $myDB->updateData($query, $para);
+        $myDB->disconnectDB();
+    }
+
+    public function getAllProductLimit($limit, $page) {
         $data = NULL;
         $myDB = new MySQLUtil();
         $query = "SELECT * FROM product ORDER BY id ASC LIMIT " . $limit . " OFFSET " . $page;
