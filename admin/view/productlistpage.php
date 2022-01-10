@@ -56,10 +56,10 @@
                                                         echo '<th scope="row">' . ($i + 1) . '</th>';
                                                         echo '<td><img style="width:100px; height:100px"  src="../../user' . substr($data['product_list'][$i]['image'], 2) . '"></td>';
                                                         echo '<td>' . $data['product_list'][$i]['name'] . '</td>';
-                                                        echo '<td>$' . $data['product_list'][$i]['price'] . '</td>';
+                                                        echo '<td>$' .$data['product_list'][$i]['price'] . '</td>';
                                                         echo '<td>' . $data['product_list'][$i]['quantity'] . '</td>';
                                                         //getID --> editUser
-//                                                        echo '<td><a href="../controller/ProductController.php?action=getedit&id=' . $data['user_list'][$i]['ID'] . '" class="btn btn-success">Edit</a></td>';
+                                                        echo '<td><a href="../controller/ProductController.php?action=editproduct&id=' . $data['product_list'][$i]['id'] . '" class="btn btn-success">Edit</a></td>';
                                                         echo '<td><a href="../controller/ProductController.php?action=delete&id=' . $data['product_list'][$i]['id'] . '" class="btn btn-danger">Delete</a></td>';
                                                         echo '</tr>';
                                                     }

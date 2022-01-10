@@ -78,11 +78,29 @@ class ProductModel {
 
     public function insertProduct() {
         $myDB = new MySQLUtil();
-
         $query = "INSERT INTO product (name, image, price, quantity) VALUES (:name, :image, :price, :quantity)";
         $para = array(":name" => $this->getName(), ":image" => $this->getImage(), ":price" => $this->getPrice(), ":quantity" => $this->getQuantity());
         $myDB->insertData($query, $para);
         $myDB->disconnectDB();
+    }
+
+    public function updateProduct() {
+        $myDB = new MySQLUtil();
+
+        $query = "UPDATE product SET name=:name, image=:image, price=:price, quantity=:quantity WHERE id=:ID";
+        $para = array(":name" => $this->getName(), ":image" => $this->getImage(), ":price" => $this->getPrice(), ":quantity" => $this->getQuantity(), ":ID" => $this->getProductID());
+        $myDB->insertData($query, $para);
+        $myDB->disconnectDB();
+    }
+
+    public function getProductByID() {
+        $data = NULL;
+        $myDB = new MySQLUtil();
+        $query = "SELECT id, name, image, price, quantity FROM product WHERE id=:id";
+        $para = array(":id" => $this->getProductID());
+        $data = $myDB->getData($query, $para);
+        $myDB->disconnectDB();
+        return $data;
     }
 
     public function deleteProduct() {

@@ -45,13 +45,6 @@ class UserController extends BaseController {
                 header('Location: ../controller/UserController.php');
                 break;
             case 'login':
-//                $userlogin_txt_email = $_POST["userlogin_txt_email"];
-//                $userlogin_txt_password = md5($_POST["userlogin_txt_email"]);
-//                if ($this->dataValid($userlogin_txt_email, $userlogin_txt_password)) {
-//                    $user = new UserModel("", $userlogin_txt_email, $userlogin_txt_email, "", "");
-//                    $data = $this->getUser($user, "email");
-//                }
-                
                 $txt_email = $_POST["txt_email"];
                 $txt_password = md5($_POST["txt_password"]);
                 $user = new UserModel("", $txt_email, $txt_password, "", "");                    
